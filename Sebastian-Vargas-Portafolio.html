@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sebastian Vargas Pizango — Senior Frontend Engineer</title>
+<meta name="description" content="Portafolio de Sebastian Vargas Pizango, Senior Frontend Engineer especializado en React, TypeScript, Next.js y sistemas de diseño.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#faf9f6;
+    --bg-alt:#f2f0ea;
+    --ink:#1c1b19;
+    --ink-soft:#4a4842;
+    --ink-faint:#8a8779;
+    --line:#e3e0d6;
+    --accent:#b5622b;
+    --accent-soft:#f1e2d3;
+    --card:#ffffff;
+    --radius:14px;
+    --serif-ish: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+    --sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    --maxw: 880px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  ::selection{background:var(--accent-soft); color:var(--ink);}
+
+  a{color:inherit;}
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* NAV */
+  header.nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(250,249,246,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:16px 28px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .nav-mark{
+    font-family:var(--serif-ish);
+    font-weight:600;
+    font-size:15px;
+    letter-spacing:0.02em;
+    text-decoration:none;
+  }
+  .nav-mark span{color:var(--accent);}
+  nav.links{
+    display:flex;
+    gap:26px;
+  }
+  nav.links a{
+    font-size:14px;
+    text-decoration:none;
+    color:var(--ink-soft);
+    position:relative;
+    padding:4px 0;
+  }
+  nav.links a:hover{color:var(--ink);}
+  .nav-toggle{
+    display:none;
+    background:none;
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:8px 10px;
+    cursor:pointer;
+    font-size:14px;
+  }
+
+  /* HERO */
+  .hero{
+    padding:96px 0 72px;
+  }
+  .eyebrow{
+    font-size:13px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:600;
+    margin-bottom:18px;
+  }
+  h1.title{
+    font-family:var(--serif-ish);
+    font-size:clamp(34px, 5.4vw, 56px);
+    line-height:1.08;
+    margin:0 0 18px;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  .role-line{
+    font-size:clamp(16px,2.2vw,19px);
+    color:var(--ink-soft);
+    max-width:640px;
+    margin:0 0 30px;
+  }
+  .role-line strong{color:var(--ink); font-weight:600;}
+
+  .hero-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 22px;
+    font-size:14px;
+    color:var(--ink-faint);
+    margin-bottom:34px;
+  }
+  .hero-meta span{display:inline-flex; align-items:center; gap:6px;}
+
+  .cta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:11px 20px;
+    border-radius:999px;
+    font-size:14px;
+    font-weight:600;
+    text-decoration:none;
+    border:1px solid var(--ink);
+    transition:all .18s ease;
+  }
+  .btn-primary{background:var(--ink); color:var(--bg);}
+  .btn-primary:hover{background:var(--accent); border-color:var(--accent);}
+  .btn-ghost{background:transparent; color:var(--ink); border-color:var(--line);}
+  .btn-ghost:hover{border-color:var(--ink);}
+
+  /* SECTION SHELL */
+  section{padding:64px 0;}
+  section + section{border-top:1px solid var(--line);}
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin-bottom:36px;
+  }
+  .section-num{
+    font-family:var(--serif-ish);
+    font-size:13px;
+    color:var(--ink-faint);
+  }
+  h2.section-title{
+    font-family:var(--serif-ish);
+    font-size:26px;
+    font-weight:600;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+
+  .lede{
+    font-size:16.5px;
+    color:var(--ink-soft);
+    max-width:680px;
+  }
+
+  /* EXPERIENCE */
+  .job{
+    padding:28px 0;
+    border-top:1px solid var(--line);
+  }
+  .job:first-child{border-top:none; padding-top:0;}
+  .job-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-bottom:6px;
+  }
+  .job-role{
+    font-family:var(--serif-ish);
+    font-size:19px;
+    font-weight:600;
+  }
+  .job-role .company{color:var(--accent);}
+  .job-dates{
+    font-size:13px;
+    color:var(--ink-faint);
+    white-space:nowrap;
+  }
+  .job-sub{
+    font-size:13.5px;
+    color:var(--ink-faint);
+    margin-bottom:14px;
+  }
+
+  .proj{
+    margin:20px 0 0;
+    padding-left:18px;
+    border-left:2px solid var(--line);
+  }
+  .proj + .proj{margin-top:22px;}
+  .proj-head{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    flex-wrap:wrap;
+    align-items:baseline;
+    margin-bottom:4px;
+  }
+  .proj-title{font-weight:600; font-size:15px;}
+  .proj-dates{font-size:12.5px; color:var(--ink-faint); white-space:nowrap;}
+  .proj-stack{
+    font-size:12.5px;
+    color:var(--accent);
+    font-style:italic;
+    margin-bottom:8px;
+  }
+  .proj ul{
+    margin:0;
+    padding-left:18px;
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+  .proj ul li{margin-bottom:6px;}
+  .proj ul li:last-child{margin-bottom:0;}
+
+  .extra-note{
+    margin-top:22px;
+    font-size:14.5px;
+    color:var(--ink-soft);
+    background:var(--bg-alt);
+    border-radius:var(--radius);
+    padding:16px 18px;
+  }
+  .extra-note strong{color:var(--ink);}
+
+  /* PROJECTS GRID */
+  .proj-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+  }
+  .proj-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:24px;
+    display:flex;
+    flex-direction:column;
+  }
+  .proj-card-tag{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--accent);
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  .proj-card h3{
+    font-family:var(--serif-ish);
+    font-size:18px;
+    margin:0 0 8px;
+  }
+  .proj-card p.role{
+    font-size:13px;
+    color:var(--ink-faint);
+    margin:0 0 12px;
+  }
+  .proj-card ul{
+    margin:0 0 16px;
+    padding-left:18px;
+    font-size:14px;
+    color:var(--ink-soft);
+    flex:1;
+  }
+  .proj-card ul li{margin-bottom:7px;}
+  .proj-card a.repo-link{
+    font-size:13px;
+    font-weight:600;
+    text-decoration:none;
+    color:var(--ink);
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-top:auto;
+  }
+  .proj-card a.repo-link:hover{color:var(--accent);}
+
+  /* SKILLS */
+  .skill-groups{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px 40px;
+  }
+  .skill-group h4{
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--ink-faint);
+    margin:0 0 12px;
+    font-weight:600;
+  }
+  .chip-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .chip{
+    font-size:13px;
+    padding:6px 13px;
+    border-radius:999px;
+    background:var(--bg-alt);
+    border:1px solid var(--line);
+    color:var(--ink-soft);
+  }
+
+  /* EDUCATION / CERTS */
+  .ed-grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:36px;
+  }
+  .ed-item h3{
+    font-family:var(--serif-ish);
+    font-size:17px;
+    margin:0 0 4px;
+  }
+  .ed-item p.school{
+    font-size:14px;
+    color:var(--ink-faint);
+    margin:0 0 10px;
+  }
+  .ed-item ul{
+    margin:0;
+    padding-left:18px;
+    font-size:14px;
+    color:var(--ink-soft);
+  }
+  .cert{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    padding:12px 0;
+    border-top:1px solid var(--line);
+    font-size:14px;
+  }
+  .cert:first-of-type{border-top:none; padding-top:0;}
+  .cert .name{font-weight:600;}
+  .cert .date{color:var(--ink-faint); font-size:12.5px; white-space:nowrap;}
+
+  .lang-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:22px;
+  }
+  .lang-chip{
+    font-size:13px;
+    padding:6px 13px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    color:var(--ink-soft);
+  }
+  .lang-chip b{color:var(--ink);}
+
+  /* FOOTER / CONTACT */
+  footer{
+    padding:70px 0 50px;
+    text-align:center;
+  }
+  footer h2{
+    font-family:var(--serif-ish);
+    font-size:clamp(26px,4vw,36px);
+    margin:0 0 14px;
+  }
+  footer p{
+    color:var(--ink-soft);
+    max-width:480px;
+    margin:0 auto 30px;
+  }
+  .foot-links{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-bottom:40px;
+  }
+  .foot-bottom{
+    font-size:12.5px;
+    color:var(--ink-faint);
+  }
+
+  @media (max-width:720px){
+    nav.links{display:none;}
+    .nav-toggle{display:inline-block;}
+    .proj-grid, .skill-groups, .ed-grid{grid-template-columns:1fr;}
+    .hero{padding:64px 0 48px;}
+    section{padding:48px 0;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-mark">Sebastian Vargas<span>.</span></a>
+    <nav class="links">
+      <a href="#about">Perfil</a>
+      <a href="#experience">Experiencia</a>
+      <a href="#projects">Proyectos</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Educación</a>
+      <a href="#contact">Contacto</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero wrap">
+    <div class="eyebrow">Disponible para roles remotos</div>
+    <h1 class="title">Sebastian Vargas Pizango</h1>
+    <p class="role-line"><strong>Senior Frontend Engineer</strong> — React · TypeScript · Next.js · Design Systems. Construyo productos web y móviles para clientes en Latinoamérica, Norteamérica y Europa.</p>
+    <div class="hero-meta">
+      <span>📍 Lima, Perú (UTC-5, remoto)</span>
+      <span>📞 +51 965 223 357</span>
+      <span>✉️ vargaspizango1@gmail.com</span>
+    </div>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="mailto:vargaspizango1@gmail.com">Escríbeme</a>
+      <a class="btn btn-ghost" href="https://linkedin.com/in/sebas-vargas" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-ghost" href="https://github.com/sebas-tcotd" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+
+  <section id="about" class="wrap">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Perfil</h2>
+    </div>
+    <p class="lede">
+      Ingeniero frontend con más de 4 años de experiencia construyendo productos web y móviles.
+      Especializado en React, TypeScript, Next.js, librerías de componentes, sistemas de diseño
+      y arquitectura frontend. Combina un background previo en diseño UX/UI con entrega práctica
+      de producto, testing, modelado de contenido y tooling para desarrolladores.
+    </p>
+  </section>
+
+  <section id="experience" class="wrap">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Experiencia</h2>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <div class="job-role">Frontend Engineer · <span class="company">Apply Digital</span></div>
+        <div class="job-dates">Oct 2022 – Abr 2026</div>
+      </div>
+      <div class="job-sub">Remoto · Tiempo completo · 10 engagements de cliente en equipos distribuidos</div>
+
+      <div class="proj">
+        <div class="proj-head">
+          <div class="proj-title">Liverpool MX — Plataforma de e-commerce retail</div>
+          <div class="proj-dates">May 2025 – Abr 2026</div>
+        </div>
+        <div class="proj-stack">React · TypeScript · Next.js App Router · Turborepo · Storybook · Contentstack · Vitest · RTL</div>
+        <ul>
+          <li>Features en producción para cuentas de cliente, catálogo y descubrimiento, checkout, detalle de producto, pagos, órdenes, wishlists y registros de regalo, en una plataforma frontend multi-aplicación.</li>
+          <li>Aportes a un sistema de diseño compartido documentado en cientos de historias de Storybook.</li>
+          <li>Tests unitarios y de componentes con Vitest y React Testing Library; mejoras de accesibilidad.</li>
+          <li>Construyó un workflow agéntico personal conectando Jira, Confluence, Figma, GitHub y el código, que redujo el tiempo de preparación de contexto en tickets complejos de ~4 horas a menos de 10 minutos.</li>
+        </ul>
+      </div>
+
+      <div class="proj">
+        <div class="proj-head">
+          <div class="proj-title">CAFE — Librería de componentes enterprise</div>
+          <div class="proj-dates">2024</div>
+        </div>
+        <div class="proj-stack">React · TypeScript · Storybook · JSDoc · Vitest · Atomic Design</div>
+        <ul>
+          <li>Identificó problemas estructurales y de documentación en una librería interna de componentes.</li>
+          <li>Propuso e implementó un refactor de producción: modularización, organización de Storybook, documentación JSDoc, cobertura con Vitest e integración de tests en CLI y editores.</li>
+          <li>Definió la identidad visual junto a Apply Digital; propuesta aprobada por ingenieros, tech lead y product owner.</li>
+        </ul>
+      </div>
+
+      <div class="proj">
+        <div class="proj-head">
+          <div class="proj-title">Americar — Plataforma automotriz multi-marca</div>
+          <div class="proj-dates">2023–2024</div>
+        </div>
+        <div class="proj-stack">React · TypeScript · Next.js · Storybook · Contentful · Atomic Design</div>
+        <ul>
+          <li>Construcción y reparación de componentes reutilizables para marcas como Salazar Israel, Portillo, Wigo Motors y otras.</li>
+          <li>Refactor de componentes grandes, mejora de exports, modelado de contenido en Contentful y migraciones.</li>
+          <li>El programa Americar reportó un aumento de 91% en tiempo en sitio y 14% en páginas vistas.</li>
+        </ul>
+      </div>
+
+      <div class="proj">
+        <div class="proj-head">
+          <div class="proj-title">Tapp — Aplicación React Native</div>
+          <div class="proj-dates">2023</div>
+        </div>
+        <div class="proj-stack">React Native · TypeScript · Contentful · Storybook · iOS & Android</div>
+        <ul>
+          <li>Co-diseñó el modelo de contenido en Contentful y mentoreó a un compañero en modelado de contenido y convenciones del proyecto.</li>
+          <li>Construcción de átomos, moléculas y organismos en la librería de componentes React Native vía Storybook y simuladores iOS/Android.</li>
+        </ul>
+      </div>
+
+      <div class="extra-note">
+        <strong>Engagements adicionales (2022–2024):</strong> modelado de contenido y migraciones para el relanzamiento del sitio de Apply Digital; estructuras de contenido en Sanity para una plataforma de real estate comercial; componentes React Native para Embonor; componentes Angular para una plataforma farmacéutica multi-marca; mantenimiento de codebases en React, Next.js y Svelte.
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <div class="job-role">Frontend Developer · <span class="company">Reign</span></div>
+        <div class="job-dates">Mar 2022 – Oct 2022</div>
+      </div>
+      <div class="job-sub">Remoto · Tiempo completo</div>
+      <ul>
+        <li>Convirtió lineamientos de un sistema de diseño en una librería de componentes Angular de producción, usando Atomic Design y theming multi-marca.</li>
+        <li>Integró Contentful y mejoró los Core Web Vitals en propiedades de cliente.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <div class="job-role">UX/UI Designer · <span class="company">Bitzone</span></div>
+        <div class="job-dates">Ene 2021 – May 2021</div>
+      </div>
+      <div class="job-sub">Lima, Perú · Remoto</div>
+      <ul>
+        <li>Rediseñó la identidad visual de la empresa y diseñó un sistema ERP en Figma.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="projects" class="wrap">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Proyectos destacados</h2>
+    </div>
+    <div class="proj-grid">
+      <div class="proj-card">
+        <div class="proj-card-tag">Open source · Desktop</div>
+        <h3>Vellum</h3>
+        <p class="role">Visor cartográfico para Cities: Skylines 1 · Desarrollador solo · Mar 2026 – presente</p>
+        <ul>
+          <li>Aplicación desktop multiplataforma que abre exports <code>.cslmap</code> como mapas interactivos: terreno, vías, transporte, edificios, bosques, distritos, temas y exportación PNG/SVG.</li>
+          <li>Arquitectura en paquetes: parser en Rust, modelo de dominio, renderer MapLibre, interfaz React, motor de temas y shell desktop en Tauri.</li>
+          <li>Instaladores probados para Windows, macOS y Linux, con Vitest, Playwright, tests en Rust, CI, documentación bilingüe y releases públicos hasta v0.5.0.</li>
+        </ul>
+        <a class="repo-link" href="https://github.com/sebas-tcotd/vellum" target="_blank" rel="noopener">github.com/sebas-tcotd/vellum →</a>
+      </div>
+      <div class="proj-card">
+        <div class="proj-card-tag">Pre-producto · Founder</div>
+        <h3>Capsule</h3>
+        <p class="role">Producto personal de guardarropa · Founder y engineer solo · Ene 2026 – presente</p>
+        <ul>
+          <li>Base de un producto de guardarropa: monorepo TypeScript/Turborepo, entorno Docker y design tokens compartidos.</li>
+          <li>Sistema de diseño React de 13 componentes con Storybook, Vitest, Testing Library y checks de accesibilidad.</li>
+          <li>Features de producto y recomendaciones con IA en desarrollo.</li>
+        </ul>
+        <a class="repo-link" href="https://github.com/sebas-tcotd/capsule" target="_blank" rel="noopener">github.com/sebas-tcotd/capsule →</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="wrap">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Skills técnicas</h2>
+    </div>
+    <div class="skill-groups">
+      <div class="skill-group">
+        <h4>Frontend</h4>
+        <div class="chip-row">
+          <span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">JavaScript</span>
+          <span class="chip">Next.js</span><span class="chip">React Native</span><span class="chip">Angular</span>
+          <span class="chip">Svelte</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">Tailwind CSS</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Sistemas de diseño</h4>
+        <div class="chip-row">
+          <span class="chip">Storybook</span><span class="chip">Atomic Design</span><span class="chip">Component Libraries</span>
+          <span class="chip">Design Tokens</span><span class="chip">JSDoc</span><span class="chip">Figma</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Testing y calidad</h4>
+        <div class="chip-row">
+          <span class="chip">Vitest</span><span class="chip">React Testing Library</span><span class="chip">Playwright</span>
+          <span class="chip">Accesibilidad</span><span class="chip">Core Web Vitals</span><span class="chip">CI/CD</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Arquitectura y tooling</h4>
+        <div class="chip-row">
+          <span class="chip">Turborepo</span><span class="chip">Clean Architecture</span><span class="chip">Tauri</span>
+          <span class="chip">Rust</span><span class="chip">MapLibre GL JS</span><span class="chip">Git</span><span class="chip">Jira</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Plataformas de contenido</h4>
+        <div class="chip-row">
+          <span class="chip">Contentful</span><span class="chip">Contentstack</span><span class="chip">Sanity</span>
+          <span class="chip">Content Modelling</span><span class="chip">Migrations</span><span class="chip">SEO</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>AI-assisted development</h4>
+        <div class="chip-row">
+          <span class="chip">Integraciones MCP</span><span class="chip">Jira/Confluence/Figma/GitHub</span><span class="chip">LLM code review</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education" class="wrap">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Educación y certificaciones</h2>
+    </div>
+    <div class="ed-grid">
+      <div class="ed-item">
+        <h3>Bachiller en Ingeniería de Software</h3>
+        <p class="school">Universidad Nacional Mayor de San Marcos · 2018–2022 · Tercio Superior</p>
+        <ul>
+          <li>Tesis: <em>Clean Architecture and User Experience Improvement for SME Web Systems</em>.</li>
+          <li>Co-presidente, XI Encuentro Nacional de Estudiantes de Ingeniería de Software (ENEISOFT).</li>
+        </ul>
+      </div>
+      <div>
+        <div class="cert">
+          <span class="name">Contentful Certified Professional</span>
+          <span class="date">Dic 2024 – Dic 2026</span>
+        </div>
+        <div class="cert">
+          <span class="name">English C1 Advanced — EF SET</span>
+          <span class="date">Abr 2026</span>
+        </div>
+        <div class="lang-row">
+          <span class="lang-chip"><b>Español</b> · nativo</span>
+          <span class="lang-chip"><b>Inglés</b> · C1</span>
+          <span class="lang-chip"><b>Portugués</b> · básico</span>
+          <span class="lang-chip"><b>Italiano</b> · básico</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact" class="wrap">
+    <h2>Conversemos</h2>
+    <p>Disponible de inmediato para roles remotos. Escríbeme por correo o conéctate en LinkedIn / GitHub.</p>
+    <div class="foot-links">
+      <a class="btn btn-primary" href="mailto:vargaspizango1@gmail.com">vargaspizango1@gmail.com</a>
+      <a class="btn btn-ghost" href="https://linkedin.com/in/sebas-vargas" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-ghost" href="https://github.com/sebas-tcotd" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="foot-bottom">Sebastian Vargas Pizango — Lima, Perú · Actualizado 2026</div>
+  </footer>
+
+</main>
+
+<script>
+  // Mobile nav toggle
+  const toggle = document.getElementById('navToggle');
+  const links = document.querySelector('nav.links');
+  if(toggle){
+    toggle.addEventListener('click', () => {
+      const isOpen = links.style.display === 'flex';
+      links.style.display = isOpen ? 'none' : 'flex';
+      links.style.flexDirection = 'column';
+      links.style.position = 'absolute';
+      links.style.top = '56px';
+      links.style.right = '20px';
+      links.style.background = '#faf9f6';
+      links.style.border = '1px solid #e3e0d6';
+      links.style.borderRadius = '10px';
+      links.style.padding = '14px 20px';
+      links.style.gap = '14px';
+      links.style.boxShadow = '0 8px 24px rgba(0,0,0,0.08)';
+    });
+  }
+</script>
+
+</body>
+</html>
